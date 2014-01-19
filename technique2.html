@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>Parallax Techniques</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <link href="css/application.css" rel="stylesheet" />
+
+  <script src="js/jquery-1.10.2.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/application.js"></script>
+</head>  <body>
+    <header class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar-header">
+    <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="#">Parallax Techniques</a>
+  </div>
+  <nav class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="index.html">Fixed Background</a>
+      </li>
+      <li>
+        <a href="technique2.html">Background Offset</a>
+      </li>
+      <li>
+        <a href="technique3.html">Canvas Frames</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a href="http://www.ballistiq.com">Ballistiq</a>
+      </li>
+      <li>
+        <a href="http://www.bigbuckbunny.org/">Big Buck Bunny</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+    <div class="offset-technique" data-parallax-offset="0.75">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="slide-content">
+              <div class="content-panel">
+                <small>Technique #2</small>
+                <h1>Background Offset</h1>
+                <p>
+                  This is a popular technique where we offset the background position when the user scrolls.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pad it more -->
+        <div class="slide-content"></div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="slide-content">
+              <div class="content-panel">
+                <h1>How it's done</h1>
+                <p>
+                  This method requires Javascript. We take the distance that the user has scrolled from the top, take a fraction of that distance and set the background position to offset the y-position by that amount.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pad it more -->
+        <div class="slide-content"></div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="slide-content">
+              <h1>Code</h1>
+              <pre>
+# Parallax Offset Technique
+$(window).scroll ->
+  distanceFromTop = $(window).scrollTop()
+  offset = distanceFromTop / 2
+  $(this).css('background-position', "center #{offset}px")</pre>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pad it more -->
+        <div class="slide-content"></div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="slide-content">
+              <h1>Awesome!</h1>
+              <a href="technique3.html" class="btn btn-info">Next Technique</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

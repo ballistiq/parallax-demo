@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <title>Parallax Techniques</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <link href="css/application.css" rel="stylesheet" />
 
   <script src="js/jquery-1.10.2.js"></script>
+  <script src="js/bootstrap.js"></script>
   <script src="js/application.js"></script>
 </head>  <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <header class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-header">
-    <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="#">ballistiq parallax demo</a>
+    <button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand" href="#">Parallax Techniques</a>
   </div>
-  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+  <nav class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     <ul class="nav navbar-nav">
       <li>
         <a href="index.html">Fixed Background</a>
@@ -20,53 +22,65 @@
         <a href="technique2.html">Background Offset</a>
       </li>
       <li>
-        <a href="technique3.html">Multi-layered</a>
-      </li>
-      <li>
-        <a href="technique4.html">Canvas Frames</a>
+        <a href="technique3.html">Canvas Frames</a>
       </li>
     </ul>
-  </div>
-</nav>
-    <div class="intro">
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a href="http://www.ballistiq.com">Ballistiq</a>
+      </li>
+      <li>
+        <a href="http://www.bigbuckbunny.org/">Big Buck Bunny</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+    <div class="fixed-technique">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
           </div>
           <div class="col-md-6">
             <div class="slide-content">
-              <h1>Static Background Technique</h1>
-              <p>
-                This is the most basic of the parallax techniques. We simply fix the background so that when the user scrolls, it remains static.
-              </p>
+              <div class="content-panel">
+                <small>Technique #1</small>
+                <h1>Fixed Background</h1>
+                <p>
+                  This is the most basic of the parallax techniques as it only requires CSS. We fix the background so that when the user scrolls, it remains stationary.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="intro-slide-2">
+    <div class="fixed-technique-slide-2">
       <div class="container">
         <div class="row">
           <div class="col-sm-6 col-md-offset-3">
             <div class="slide-content">
-              <center>
+              <div class="content-panel">
                 <h1>How did you do that?</h1>
+                <p>
+                  The key is to set your background-attachment to "fixed". This will make it immovable when the user scrolls.
+                </p>
                 <pre>background-attachment: fixed;</pre>
-              </center>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="intro-slide-3">
+    <div class="fixed-technique-slide-3">
       <div class="container">
         <div class="row">
           <div class="col-sm-12">
             <div class="slide-content">
               <center>
-                <a href="technique2.html" class="btn btn-info">Next Technique: Background Offset</a>
+                <h1>Wow!</h1>
+                <a href="technique2.html" class="btn btn-info">Next Technique</a>
               </center>
             </div>
           </div>
