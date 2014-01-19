@@ -2,6 +2,8 @@
 
 This is a quick overview of three techniques for achieving parallax effect.
 
+[See the demos here](http://ballistiq.github.io/parallax-demo/)
+
 ## Running the demo
 
 1. Clone the repository
