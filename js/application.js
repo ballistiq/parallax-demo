@@ -13,80 +13,83 @@ $(function() {
   };
   padContent();
   $(window).resize(padContent);
-  $(window).scroll(function() {
-    var distanceFromTop;
-    distanceFromTop = $(window).scrollTop();
-    return $("div[data-parallax-offset]").each(function() {
-      var offset, x;
-      x = $(this).data('parallax-offset');
-      offset = x * distanceFromTop;
-      return $(this).css('background-position', "center " + offset + "px");
+  if ($('.offset-technique').length > 0) {
+    $(window).scroll(function() {
+      var distanceFromTop;
+      distanceFromTop = $(window).scrollTop();
+      return $("div[data-parallax-offset]").each(function() {
+        var offset;
+        offset = Math.round(-distanceFromTop * 0.2);
+        return $(this).css('background-position', "50% " + offset + "px");
+      });
     });
-  });
-  resizeCanvas = function() {
-    var windowHeight, windowWidth;
-    windowWidth = $(window).width();
-    windowHeight = $(window).height();
-    return $('#parallax-canvas').attr('width', windowWidth).attr('height', windowHeight);
-  };
-  resizeCanvas();
-  $(window).resize(resizeCanvas);
-  canvas = document.getElementById('parallax-canvas');
-  context = canvas.getContext('2d');
-  currentFrame = 1;
-  totalFrames = 112;
-  sequence = [];
-  renderCurrentFrame = function() {
-    return render(sequence[currentFrame]);
-  };
-  render = function(img) {
-    var h, videoAspectRatio, videoHeight, videoWidth, w, windowAspectRatio, windowHeight, windowWidth, x;
-    console.log("Rendering frame: " + img.frame + ", " + img.src);
-    windowWidth = $(window).width();
-    windowHeight = $(window).height();
-    windowAspectRatio = windowWidth / windowHeight;
-    videoWidth = 1920;
-    videoHeight = 1080;
-    videoAspectRatio = videoWidth / videoHeight;
-    if (windowAspectRatio > videoAspectRatio) {
-      w = windowWidth;
-      h = windowWidth / videoAspectRatio;
-    } else {
-      w = videoAspectRatio * windowHeight;
-      h = windowHeight;
-    }
-    x = -(w - windowWidth) / 2;
-    return context.drawImage(img, x, 0, w, h);
-  };
-  loadImageSequence = function() {
-    var file, i, img, num, _i;
+  }
+  if ($('#parallax-canvas').length > 0) {
+    resizeCanvas = function() {
+      var windowHeight, windowWidth;
+      windowWidth = $(window).width();
+      windowHeight = $(window).height();
+      return $('#parallax-canvas').attr('width', windowWidth).attr('height', windowHeight);
+    };
+    resizeCanvas();
+    $(window).resize(resizeCanvas);
+    canvas = document.getElementById('parallax-canvas');
+    context = canvas.getContext('2d');
+    currentFrame = 1;
+    totalFrames = 112;
     sequence = [];
-    for (i = _i = 1; 1 <= totalFrames ? _i <= totalFrames : _i >= totalFrames; i = 1 <= totalFrames ? ++_i : --_i) {
-      img = new Image();
-      num = ("0000" + i).slice(-4);
-      file = "/sequence/bbb_" + num + ".jpg";
-      img.src = file;
-      img.frame = i;
-      img.onload = function() {
-        console.log("Loaded frame " + this.frame);
-        return loadedFrameCallback(this);
-      };
-      sequence.push(img);
-    }
-    return sequence;
-  };
-  loadedFrameCallback = function(img) {
-    if (img.frame === 1) {
-      return render(img);
-    }
-  };
-  sequence = loadImageSequence();
-  $(window).resize(renderCurrentFrame);
-  return $(window).scroll(function() {
-    var offset;
-    offset = $(window).scrollTop();
-    console.log("Offset: " + offset);
-    currentFrame = Math.round(offset / 30);
-    return renderCurrentFrame();
-  });
+    renderCurrentFrame = function() {
+      return render(sequence[currentFrame]);
+    };
+    render = function(img) {
+      var h, videoAspectRatio, videoHeight, videoWidth, w, windowAspectRatio, windowHeight, windowWidth, x;
+      console.log("Rendering frame: " + img.frame + ", " + img.src);
+      windowWidth = $(window).width();
+      windowHeight = $(window).height();
+      windowAspectRatio = windowWidth / windowHeight;
+      videoWidth = 1920;
+      videoHeight = 1080;
+      videoAspectRatio = videoWidth / videoHeight;
+      if (windowAspectRatio > videoAspectRatio) {
+        w = windowWidth;
+        h = windowWidth / videoAspectRatio;
+      } else {
+        w = videoAspectRatio * windowHeight;
+        h = windowHeight;
+      }
+      x = -(w - windowWidth) / 2;
+      return context.drawImage(img, x, 0, w, h);
+    };
+    loadImageSequence = function() {
+      var file, i, img, num, _i;
+      sequence = [];
+      for (i = _i = 1; 1 <= totalFrames ? _i <= totalFrames : _i >= totalFrames; i = 1 <= totalFrames ? ++_i : --_i) {
+        img = new Image();
+        num = ("0000" + i).slice(-4);
+        file = "/sequence/bbb_" + num + ".jpg";
+        img.src = file;
+        img.frame = i;
+        img.onload = function() {
+          console.log("Loaded frame " + this.frame);
+          return loadedFrameCallback(this);
+        };
+        sequence.push(img);
+      }
+      return sequence;
+    };
+    loadedFrameCallback = function(img) {
+      if (img.frame === 1) {
+        return render(img);
+      }
+    };
+    sequence = loadImageSequence();
+    $(window).resize(renderCurrentFrame);
+    return $(window).scroll(function() {
+      var offset;
+      offset = $(window).scrollTop();
+      console.log("Offset: " + offset);
+      currentFrame = Math.round(offset / 30);
+      return renderCurrentFrame();
+    });
+  }
 });

@@ -35,67 +35,77 @@
     </ul>
   </nav>
 </header>
-    <div class="offset-technique" data-parallax-offset="0.75">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <div class="slide-content">
-              <div class="content-panel">
-                <small>Technique #2</small>
-                <h1>Background Offset</h1>
-                <p>
-                  This is a popular technique where we offset the background position when the user scrolls.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="offset-technique" data-parallax-offset>
+    </div>
 
-        <!-- Pad it more -->
-        <div class="slide-content"></div>
+    <div class="offset-technique-content">
 
-        <div class="row">
-          <div class="col-md-6">
-            <div class="slide-content">
-              <div class="content-panel">
-                <h1>How it's done</h1>
-                <p>
-                  This method requires Javascript. We take the distance that the user has scrolled from the top, take a fraction of that distance and set the background position to offset the y-position by that amount.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pad it more -->
-        <div class="slide-content"></div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="slide-content">
-              <h1>Code</h1>
-              <pre>
-# Parallax Offset Technique
-$(window).scroll ->
-  distanceFromTop = $(window).scrollTop()
-  offset = distanceFromTop / 2
-  $(this).css('background-position', "center #{offset}px")</pre>
-            </div>
-          </div>
-        </div>
-
-        <!-- Pad it more -->
-        <div class="slide-content"></div>
-
-        <div class="row">
-          <div class="col-md-6">
-            <div class="slide-content">
-              <h1>Awesome!</h1>
-              <a href="technique3.html" class="btn btn-info">Next Technique</a>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="slide-content">
+            <div class="content-panel">
+              <small>Technique #2</small>
+              <h1>Background Offset</h1>
+              <p>
+                This is a popular technique where we offset the background position when the user scrolls. Check out the <a href="http://ianlunn.co.uk/plugins/jquery-parallax/">jQuery Parallax plugin</a> which is an easy way to integrate this effect.
+              </p>
             </div>
           </div>
         </div>
       </div>
+
+      <!-- Pad it more -->
+      <div class="slide-content"></div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="slide-content">
+            <div class="content-panel">
+              <h1>How it's done</h1>
+              <p>
+                This method requires Javascript. We take the distance that the user has scrolled from the top, take a fraction of that distance and set the background position to offset the y-position by that amount.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pad it more -->
+      <div class="slide-content"></div>
+
+      <div class="row">
+        <div class="col-md-6 col-md-offset-6">
+          <div class="slide-content">
+
+            <h1>Code</h1>
+            <pre>
+# Parallax Offset Technique
+$(window).scroll ->
+distanceFromTop = $(window).scrollTop()
+offset = - distanceFromTop * 0.2
+$(this).css('background-position', "50% #{offset}px")</pre>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Pad it more -->
+      <div class="slide-content"></div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="slide-content">
+            <center>
+              <h1>Awesome!</h1>
+              <a href="technique3.html" class="btn btn-info">Next Technique</a>
+            </center>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pad it more -->
+      <div class="slide-content"></div>
+
     </div>
 
   </body>

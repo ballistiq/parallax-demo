@@ -5996,34 +5996,35 @@ html {
 .padding {
   height: 300px;
 }
-.fixed-technique {
-  background-image: url("../img/intro.png");
+.fixed-technique-slide {
   background-position: center 0;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
   height: 100%;
+  overflow-x: hidden;
 }
-.fixed-technique-slide-2 {
+.fixed-technique-slide.slide1 {
+  background-image: url("../img/intro.png");
+}
+.fixed-technique-slide.slide2 {
   background-image: url("../img/bird1.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  height: 100%;
 }
-.fixed-technique-slide-3 {
+.fixed-technique-slide.slide3 {
   background-image: url("../img/bunny-bow.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  height: 100%;
 }
 .offset-technique {
   background-image: url("../img/poster_bunny_bunnysize.jpg");
-  background-position: center 0;
+  background-position: 50% 0px;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 440%;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+.offset-technique-content {
+  overflow-x: hidden;
 }
 .canvas-technique {
   position: fixed;
@@ -6035,4 +6036,9 @@ html {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+}
+.canvas-technique-content {
+  position: absolute;
+  width: 100%;
+  overflow-x: hidden;
 }
