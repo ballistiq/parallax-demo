@@ -66,7 +66,7 @@ $(function() {
       for (i = _i = 1; 1 <= totalFrames ? _i <= totalFrames : _i >= totalFrames; i = 1 <= totalFrames ? ++_i : --_i) {
         img = new Image();
         num = ("0000" + i).slice(-4);
-        file = "/sequence/bbb_" + num + ".jpg";
+        file = "sequence/bbb_" + num + ".jpg";
         img.src = file;
         img.frame = i;
         img.onload = function() {

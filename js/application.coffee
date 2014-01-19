@@ -68,7 +68,7 @@ $ ->
       for i in [1..totalFrames]
         img = new Image()
         num = ("0000" + i).slice(-4);
-        file = "/sequence/bbb_#{num}.jpg"
+        file = "sequence/bbb_#{num}.jpg"
         img.src = file
         img.frame = i
         img.onload = ->
