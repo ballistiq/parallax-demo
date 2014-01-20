@@ -1,6 +1,6 @@
 # Parallax Techniques Demo
 
-This is a quick overview of three techniques for achieving parallax effect.
+This is a quick overview of three techniques for achieving parallax effect. Produced for an internal training session at Ballistiq.
 
 [See the demos here](http://ballistiq.github.io/parallax-demo/)
 
