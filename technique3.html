@@ -8,6 +8,7 @@
   <script src="js/jquery-1.10.2.js"></script>
   <script src="js/bootstrap.js"></script>
   <script src="js/application.js"></script>
+  <script src="js/prettify.js"></script>
 </head>  <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-header">
@@ -81,21 +82,49 @@
         <div class="col-md-6 col-md-offset-6">
           <div class="slide-content">
             <h1>Code</h1>
-            <pre>
+            <pre class="prettyprint lang-coffee linenums">
+resizeCanvas = ->
+  windowWidth = $(window).width()
+  windowHeight = $(window).height()
+  $('#parallax-canvas').attr('width', windowWidth).attr('height', windowHeight)
+resizeCanvas()
+$(window).resize(resizeCanvas)
+
 canvas = document.getElementById('parallax-canvas')
 context = canvas.getContext('2d')
 
+# Global current frame
 currentFrame = 1
 totalFrames = 112
 sequence = []
 
 # Render current frame
 renderCurrentFrame = ->
+  offset = $(window).scrollTop()
+  currentFrame = Math.round(offset / 40)
+  if currentFrame >= totalFrames
+    currentFrame = totalFrames - 1
   render(sequence[currentFrame])
 
 # render an image from the sequence
 render = (img) ->
-  ...
+  # Set image drawing
+  windowWidth = $(window).width()
+  windowHeight = $(window).height()
+  windowAspectRatio = windowWidth / windowHeight
+  videoWidth = 1920
+  videoHeight = 1080
+  videoAspectRatio = videoWidth / videoHeight
+
+  if windowAspectRatio > videoAspectRatio
+    w = windowWidth
+    h = windowWidth / videoAspectRatio
+  else
+    w = videoAspectRatio * windowHeight
+    h = windowHeight
+
+  # Center the image
+  x = -(w - windowWidth)/2
   context.drawImage(img, x, 0, w, h)
 
 # Load the image sequence into an array
@@ -104,19 +133,26 @@ loadImageSequence = ->
   for i in [1..totalFrames]
     img = new Image()
     num = ("0000" + i).slice(-4);
-    file = "/sequence/bbb_#{num}.jpg"
+    file = "#{rootPath}/sequence/bbb_#{num}.jpg"
     img.src = file
-    ...
+    img.frame = i
+    img.onload = ->
+      loadedFrameCallback(this)
     sequence.push img
   return sequence
 
+loadedFrameCallback = (img) ->
+  # Draw first frame
+  if img.frame == 1
+    render(img)
+
 # Load the sequence into an array
 sequence = loadImageSequence()
+$(window).resize(renderCurrentFrame)
 
 $(window).scroll ->
-  offset = $(window).scrollTop()
-  currentFrame = Math.round(offset / 30)
-  renderCurrentFrame()</pre>
+  renderCurrentFrame()
+$(window).on 'touchmove', renderCurrentFrame</pre>
           </div>
         </div>
       </div>
@@ -136,6 +172,7 @@ $(window).scroll ->
               </p>
               <p>
                 Leonard Teo<br />
+                leo (at) ballistiq.com<br />
                 <a href="http://www.ballistiq.com">Ballistiq</a>
               </p>
             </div>

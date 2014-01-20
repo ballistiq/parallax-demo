@@ -5,6 +5,8 @@ else
 
 $ ->
 
+  prettyPrint()
+
   padContent = ->
     windowHeight = $(window).height()
     $('.slide-content').each ->
@@ -54,7 +56,9 @@ $ ->
     # Render current frame
     renderCurrentFrame = ->
       offset = $(window).scrollTop()
-      currentFrame = Math.round(offset / 30)
+      currentFrame = Math.round(offset / 40)
+      if currentFrame >= totalFrames
+        currentFrame = totalFrames - 1
       render(sequence[currentFrame])
 
     # render an image from the sequence

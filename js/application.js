@@ -9,6 +9,7 @@ if (document.location.hostname === "ballistiq.github.io") {
 
 $(function() {
   var canvas, context, currentFrame, iOS, loadImageSequence, loadedFrameCallback, offsetBackground, padContent, render, renderCurrentFrame, resizeCanvas, sequence, totalFrames;
+  prettyPrint();
   padContent = function() {
     var windowHeight;
     windowHeight = $(window).height();
@@ -57,7 +58,10 @@ $(function() {
     renderCurrentFrame = function() {
       var offset;
       offset = $(window).scrollTop();
-      currentFrame = Math.round(offset / 30);
+      currentFrame = Math.round(offset / 40);
+      if (currentFrame >= totalFrames) {
+        currentFrame = totalFrames - 1;
+      }
       return render(sequence[currentFrame]);
     };
     render = function(img) {

@@ -8,6 +8,7 @@
   <script src="js/jquery-1.10.2.js"></script>
   <script src="js/bootstrap.js"></script>
   <script src="js/application.js"></script>
+  <script src="js/prettify.js"></script>
 </head>  <body>
     <header class="navbar navbar-inverse navbar-fixed-top">
   <div class="navbar-header">
@@ -81,12 +82,15 @@
           <div class="slide-content">
 
             <h1>Code</h1>
-            <pre>
-# Parallax Offset Technique
+            <pre class="prettyprint lang-coffee linenums">
+offsetBackground = ->
+  distanceFromTop = $(window).scrollTop()
+  $("div[data-parallax-offset]").each ->
+    offset = Math.round( - distanceFromTop * 0.2 )
+    $(this).css('background-position', "50% #{offset}px")
+
 $(window).scroll ->
-distanceFromTop = $(window).scrollTop()
-offset = - distanceFromTop * 0.2
-$(this).css('background-position', "50% #{offset}px")</pre>
+  offsetBackground()</pre>
 
           </div>
         </div>
