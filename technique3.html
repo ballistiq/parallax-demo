@@ -151,8 +151,9 @@ loadedFrameCallback = (img) ->
 
 # Load the sequence into an array
 sequence = loadImageSequence()
-$(window).resize(renderCurrentFrame)
 
+# Bind rendering
+$(window).resize(renderCurrentFrame)
 $(window).scroll ->
   renderCurrentFrame()
 $(window).on 'touchmove', renderCurrentFrame</pre>
