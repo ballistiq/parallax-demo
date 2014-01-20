@@ -15,13 +15,24 @@ $ ->
 
   $(window).resize(padContent)
 
+
+  # Fixed background hack for iOS
+  iOS = /(iPad|iPhone|iPod)/g.test( navigator.userAgent )
+  if iOS
+    $('.fixed-technique-slide').css('background-attachment', 'scroll')
+
+
   # Parallax Offset Technique
   if $('.offset-technique').length > 0
-    $(window).scroll ->
+    offsetBackground = ->
       distanceFromTop = $(window).scrollTop()
       $("div[data-parallax-offset]").each ->
         offset = Math.round( - distanceFromTop * 0.2 )
         $(this).css('background-position', "50% #{offset}px")
+
+    $(window).scroll ->
+      offsetBackground()
+    $(window).on 'touchmove', offsetBackground
 
   # Canvas Image Sequence Technique
   if $('#parallax-canvas').length > 0
@@ -42,12 +53,12 @@ $ ->
 
     # Render current frame
     renderCurrentFrame = ->
+      offset = $(window).scrollTop()
+      currentFrame = Math.round(offset / 30)
       render(sequence[currentFrame])
 
     # render an image from the sequence
     render = (img) ->
-      console.log "Rendering frame: #{img.frame}, #{img.src}"
-
       # Set image drawing
       windowWidth = $(window).width()
       windowHeight = $(window).height()
@@ -77,7 +88,6 @@ $ ->
         img.src = file
         img.frame = i
         img.onload = ->
-          console.log "Loaded frame #{this.frame}"
           loadedFrameCallback(this)
         sequence.push img
       return sequence
@@ -89,13 +99,9 @@ $ ->
 
     # Load the sequence into an array
     sequence = loadImageSequence()
-
     $(window).resize(renderCurrentFrame)
 
     $(window).scroll ->
-      offset = $(window).scrollTop()
-      console.log "Offset: #{offset}"
-      currentFrame = Math.round(offset / 30)
       renderCurrentFrame()
-
+    $(window).on 'touchmove', renderCurrentFrame
 

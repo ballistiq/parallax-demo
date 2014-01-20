@@ -8,7 +8,7 @@ if (document.location.hostname === "ballistiq.github.io") {
 }
 
 $(function() {
-  var canvas, context, currentFrame, loadImageSequence, loadedFrameCallback, padContent, render, renderCurrentFrame, resizeCanvas, sequence, totalFrames;
+  var canvas, context, currentFrame, iOS, loadImageSequence, loadedFrameCallback, offsetBackground, padContent, render, renderCurrentFrame, resizeCanvas, sequence, totalFrames;
   padContent = function() {
     var windowHeight;
     windowHeight = $(window).height();
@@ -21,8 +21,12 @@ $(function() {
   };
   padContent();
   $(window).resize(padContent);
+  iOS = /(iPad|iPhone|iPod)/g.test(navigator.userAgent);
+  if (iOS) {
+    $('.fixed-technique-slide').css('background-attachment', 'scroll');
+  }
   if ($('.offset-technique').length > 0) {
-    $(window).scroll(function() {
+    offsetBackground = function() {
       var distanceFromTop;
       distanceFromTop = $(window).scrollTop();
       return $("div[data-parallax-offset]").each(function() {
@@ -30,7 +34,11 @@ $(function() {
         offset = Math.round(-distanceFromTop * 0.2);
         return $(this).css('background-position', "50% " + offset + "px");
       });
+    };
+    $(window).scroll(function() {
+      return offsetBackground();
     });
+    $(window).on('touchmove', offsetBackground);
   }
   if ($('#parallax-canvas').length > 0) {
     resizeCanvas = function() {
@@ -47,11 +55,13 @@ $(function() {
     totalFrames = 112;
     sequence = [];
     renderCurrentFrame = function() {
+      var offset;
+      offset = $(window).scrollTop();
+      currentFrame = Math.round(offset / 30);
       return render(sequence[currentFrame]);
     };
     render = function(img) {
       var h, videoAspectRatio, videoHeight, videoWidth, w, windowAspectRatio, windowHeight, windowWidth, x;
-      console.log("Rendering frame: " + img.frame + ", " + img.src);
       windowWidth = $(window).width();
       windowHeight = $(window).height();
       windowAspectRatio = windowWidth / windowHeight;
@@ -78,7 +88,6 @@ $(function() {
         img.src = file;
         img.frame = i;
         img.onload = function() {
-          console.log("Loaded frame " + this.frame);
           return loadedFrameCallback(this);
         };
         sequence.push(img);
@@ -92,12 +101,9 @@ $(function() {
     };
     sequence = loadImageSequence();
     $(window).resize(renderCurrentFrame);
-    return $(window).scroll(function() {
-      var offset;
-      offset = $(window).scrollTop();
-      console.log("Offset: " + offset);
-      currentFrame = Math.round(offset / 30);
+    $(window).scroll(function() {
       return renderCurrentFrame();
     });
+    return $(window).on('touchmove', renderCurrentFrame);
   }
 });
